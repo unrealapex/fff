@@ -377,10 +377,10 @@ draw_img() {
         return
 
     # w3m-img isn't installed, do nothing.
-    type -p "$w3m" &>/dev/null || {
-        cmd_line "error: Couldn't find 'w3m-img', is it installed?"
-        return
-    }
+    # type -p "$w3m" &>/dev/null || {
+    #     cmd_line "error: Couldn't find 'w3m-img', is it installed?"
+    #     return
+    # }
 
     # $win_info_cmd isn't installed, do nothing.
     type -p "${win_info_cmd:=xdotool}" &>/dev/null || {
@@ -426,12 +426,7 @@ draw_img() {
         read "${read_flags[@]}" -srn 1
 
     # Display the image.
-    printf '0;1;%s;%s;%s;%s;;;;;%s\n3;\n4\n' \
-        "${FFF_W3M_XOFFSET:-0}" \
-        "${FFF_W3M_YOFFSET:-0}" \
-        "$img_width" \
-        "$img_height" \
-        "${list[scroll]}" | "$w3m" &>/dev/null
+    chafa "${list[scroll]}"
 
     # Wait for user input.
     read -ern 1
